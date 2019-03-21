@@ -1,0 +1,20 @@
+{
+  "name": "jqueryplayer",
+  "version": "1.0.0",
+  "description": "Music Player using JS+JQuery+HTML+CSS and SoundCloud API",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Danisaur117/jQueryPlayer.git"
+  },
+  "author": "Daniel Belmonte Urbano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Danisaur117/jQueryPlayer/issues"
+  },
+  "homepage": "https://github.com/Danisaur117/jQueryPlayer#readme"
+}
