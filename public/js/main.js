@@ -2,6 +2,7 @@
 
 const SearchButton = $('#searchButton');
 const SearchInput = $('#searchInput');
+const ArtistList = $('.list');
 
 //Search call on button clicked
 SearchButton.click(function(){
@@ -29,6 +30,13 @@ const FindArtist = async (searchText) => {
 
     let tracks = await SC.get('/tracks', {q:searchText})
     .then((results) => {
-        console.log(results);
+        ArtistList.empty();
+        results.forEach(element => {
+            let artworkURL = element.artwork_url;
+            if (artworkURL !== null){
+                let artworkLink = `<img src="${artworkURL}">`;
+                ArtistList.append(artworkLink);
+            }
+        });
     })
 }
