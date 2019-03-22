@@ -3,6 +3,7 @@
 const SearchButton = $('#searchButton');
 const SearchInput = $('#searchInput');
 const ArtistList = $('.list');
+const Player = $('#cover');
 
 //Search call on button clicked
 SearchButton.click(function(){
@@ -32,11 +33,39 @@ const FindArtist = async (searchText) => {
     .then((results) => {
         ArtistList.empty();
         results.forEach(element => {
+            //console.log(element);
             let artworkURL = element.artwork_url;
+            let songID = element.id;
+
             if (artworkURL !== null){
-                let artworkLink = `<img src="${artworkURL}">`;
+                let artworkLink = `<img src="${artworkURL}" id="${songID}" draggable="true" ondragstart="drag(event)">`;
                 ArtistList.append(artworkLink);
             }
         });
     })
+}
+
+//Drag event implementation
+function drag(ev) {
+    ev.dataTransfer.setData('img', ev.target.src);
+    ev.dataTransfer.setData('text', ev.target.id);
+}
+
+//Drop event implementation
+function drop(ev){
+    let artworkURL = ev.dataTransfer.getData('img');
+    let songID = ev.dataTransfer.getData('text');
+    let artworkLink = `<img src="${artworkURL}">`;
+
+    Player.empty();
+    Player.append(artworkLink);
+
+    let song = SC.stream('/tracks/' + songID)
+    .then(function(song){
+        song.play();
+    });
+}
+
+function allowDrop(ev){
+    ev.preventDefault();
 }
